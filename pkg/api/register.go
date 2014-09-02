@@ -14,14 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package v1beta1
+package api
 
 import (
 	"github.com/GoogleCloudPlatform/kubernetes/pkg/runtime"
 )
 
 func init() {
-	runtime.AddKnownTypes("v1beta1",
+	runtime.AddKnownTypes("",
 		PodList{},
 		Pod{},
 		ReplicationControllerList{},

@@ -14,27 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package v1beta1
-
-import (
-	"github.com/GoogleCloudPlatform/kubernetes/pkg/runtime"
-)
-
-func init() {
-	runtime.AddKnownTypes("v1beta1",
-		PodList{},
-		Pod{},
-		ReplicationControllerList{},
-		ReplicationController{},
-		ServiceList{},
-		Service{},
-		MinionList{},
-		Minion{},
-		Status{},
-		ServerOpList{},
-		ServerOp{},
-		ContainerManifestList{},
-		Endpoints{},
-		Binding{},
-	)
-}
+// Package validation has functions for validating the correctness of api
+// objects and explaining what is wrong with them when they aren't valid.
+package validation
