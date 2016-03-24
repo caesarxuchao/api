@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package etcd
+package storage
 
 import (
 	"k8s.io/kubernetes/pkg/api/errors"
@@ -69,6 +69,8 @@ func InterpretUpdateError(err error, qualifiedResource unversioned.GroupResource
 		return errors.NewConflict(qualifiedResource, name, err)
 	case storage.IsUnreachable(err):
 		return errors.NewServerTimeout(qualifiedResource, "update", 2) // TODO: make configurable or handled at a higher level
+	case storage.IsNotFound(err):
+		return errors.NewNotFound(qualifiedResource, name)
 	default:
 		return err
 	}
