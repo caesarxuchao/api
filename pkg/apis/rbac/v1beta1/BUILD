@@ -10,20 +10,29 @@ load(
 go_library(
     name = "go_default_library",
     srcs = [
+        "defaults.go",
         "doc.go",
+        "generated.pb.go",
         "helpers.go",
         "register.go",
+        "types.generated.go",
         "types.go",
+        "types_swagger_doc_generated.go",
+        "zz_generated.conversion.go",
         "zz_generated.deepcopy.go",
+        "zz_generated.defaults.go",
     ],
     tags = ["automanaged"],
     deps = [
-        "//pkg/api:go_default_library",
+        "//pkg/api/v1:go_default_library",
+        "//pkg/apis/rbac:go_default_library",
+        "//vendor:github.com/gogo/protobuf/proto",
+        "//vendor:github.com/ugorji/go/codec",
         "//vendor:k8s.io/apimachinery/pkg/apis/meta/v1",
         "//vendor:k8s.io/apimachinery/pkg/conversion",
         "//vendor:k8s.io/apimachinery/pkg/runtime",
         "//vendor:k8s.io/apimachinery/pkg/runtime/schema",
-        "//vendor:k8s.io/apimachinery/pkg/util/sets",
+        "//vendor:k8s.io/apimachinery/pkg/types",
     ],
 )
 
@@ -36,12 +45,6 @@ filegroup(
 
 filegroup(
     name = "all-srcs",
-    srcs = [
-        ":package-srcs",
-        "//pkg/apis/rbac/install:all-srcs",
-        "//pkg/apis/rbac/v1alpha1:all-srcs",
-        "//pkg/apis/rbac/v1beta1:all-srcs",
-        "//pkg/apis/rbac/validation:all-srcs",
-    ],
+    srcs = [":package-srcs"],
     tags = ["automanaged"],
 )
