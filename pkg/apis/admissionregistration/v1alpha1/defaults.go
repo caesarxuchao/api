@@ -1,5 +1,5 @@
 /*
-Copyright 2016 The Kubernetes Authors.
+Copyright 2017 The Kubernetes Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,10 +14,26 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package annotations
+package v1alpha1
 
-const kubectlPrefix = "kubectl.kubernetes.io/"
+import (
+	"k8s.io/apimachinery/pkg/runtime"
+)
 
-// LastAppliedConfigAnnotation is the annotation used to store the previous
-// configuration of a resource for use in a three way diff by UpdateApplyAnnotation.
-const LastAppliedConfigAnnotation = kubectlPrefix + "last-applied-configuration"
+func addDefaultingFuncs(scheme *runtime.Scheme) error {
+	return RegisterDefaults(scheme)
+}
+
+func SetDefaults_Initializer(obj *Initializer) {
+	if obj.FailurePolicy == nil {
+		policy := Ignore
+		obj.FailurePolicy = &policy
+	}
+}
+
+func SetDefaults_ExternalAdmissionHook(obj *ExternalAdmissionHook) {
+	if obj.FailurePolicy == nil {
+		policy := Ignore
+		obj.FailurePolicy = &policy
+	}
+}

@@ -9,11 +9,16 @@ load(
 
 go_library(
     name = "go_default_library",
-    srcs = [
-        "annotations.go",
-        "doc.go",
-    ],
+    srcs = ["install.go"],
     tags = ["automanaged"],
+    deps = [
+        "//pkg/api:go_default_library",
+        "//pkg/apis/networking:go_default_library",
+        "//pkg/apis/networking/v1:go_default_library",
+        "//vendor/k8s.io/apimachinery/pkg/apimachinery/announced:go_default_library",
+        "//vendor/k8s.io/apimachinery/pkg/apimachinery/registered:go_default_library",
+        "//vendor/k8s.io/apimachinery/pkg/runtime:go_default_library",
+    ],
 )
 
 filegroup(
